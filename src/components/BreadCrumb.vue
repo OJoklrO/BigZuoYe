@@ -1,14 +1,23 @@
 <template>
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-    <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+    <el-breadcrumb-item><a @click="toHome()">首页</a></el-breadcrumb-item>
+    <el-breadcrumb-item v-if="current">{{ current.label }}</el-breadcrumb-item>
   </el-breadcrumb>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState({ current: state => state.tab.currentMenu })
+  },
+  methods: {
+    toHome() {
+      this.$store.commit("toHome");
+      this.$router.push("/");
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

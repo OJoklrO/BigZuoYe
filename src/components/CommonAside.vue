@@ -2,9 +2,9 @@
   <el-menu default-active="" class="aside">
     <el-menu-item
       :index="item.path"
-      v-for="item in asideMenu"
+      v-for="item in randerList"
       :key="item.path"
-      @click="ToPath(item.path)"
+      @click="ClickMenu(item)"
     >
       <i :class="'el-icon-' + item.icon"></i>
       <span slot="title">{{ item.label }}</span>
@@ -14,8 +14,25 @@
 
 <script>
 export default {
+  computed: {
+    randerList: function() {
+      var list = new Array();
+      if (this.$store.state.user == null) return this.asideMenu;
+
+      for (var i in this.asideMenu) {
+        if (
+          this.asideMenu[i].authority == 1 ||
+          this.asideMenu[i].authority == 3
+        )
+          list.push(this.asideMenu[i]);
+      }
+
+      return list;
+    }
+  },
   methods: {
-    ToPath(item) {
+    ClickMenu(item) {
+      this.$store.commit("selectMenu", item);
       this.$router.push(item);
     }
   },
@@ -25,27 +42,32 @@ export default {
         {
           path: "/course",
           label: "课程管理",
-          icon: "date"
+          icon: "date",
+          authority: 1
         },
         {
           path: "/labmanager",
           label: "实验管理",
-          icon: "tickets"
+          icon: "tickets",
+          authority: 1
         },
         {
           path: "/lab",
           label: "实验室管理",
-          icon: "postcard"
+          icon: "postcard",
+          authority: 1
         },
         {
           path: "/addachieve",
           label: "成绩录入",
-          icon: "right"
+          icon: "right",
+          authority: 2
         },
         {
           path: "/search",
           label: "成绩查询",
-          icon: "search"
+          icon: "search",
+          authority: 3
         }
       ]
     };

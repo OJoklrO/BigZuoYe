@@ -14,6 +14,7 @@ export default {
   },
   methods: {
     onclick() {
+      this.$store.commit("toHome");
       this.$router.push("/");
     }
   }
