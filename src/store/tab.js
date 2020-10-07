@@ -1,6 +1,6 @@
 export default {
   state: {
-    currentMenu: {}
+    currentMenu: {},
   },
   mutations: {
     selectMenu(state, val) {

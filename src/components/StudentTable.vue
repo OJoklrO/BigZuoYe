@@ -1,22 +1,23 @@
 <template>
+<div>
   <el-table
     :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%;" max-height="420">
     <el-table-column
       label="学号"
-      prop="date">
+      prop="stuId">
     </el-table-column>
     <el-table-column
       label="姓名"
-      prop="date">
+      prop="stuName">
     </el-table-column>
     <el-table-column
       label="班级"
-      prop="date">
+      prop="stuClass">
     </el-table-column>
     <el-table-column
       label="实验成绩"
-      prop="name">
+      prop="stuGrade">
     </el-table-column>
     <el-table-column
       align="right">
@@ -37,47 +38,34 @@
       </template>
     </el-table-column>
   </el-table>
+  <div class="box_banner">
+    <input type="text" placeholder="请输入成绩" v-model="grade">
+  </div>
+</div>
+  
 </template>
 
 <script>
+  import {mapState} from "vuex"
   export default {
+    computed: {
+        ...mapState({tableData: state => state.grade.grades})
+    },
     data() {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }],
-        search: ''
+        search: '',
+        grade:""
       }
     },
     methods: {
       handleEdit(index, row) {
-        console.log(index, row);
+        console.log(index);
+        console.log(row);
+        // 实现改变成绩操作
+        console.log(this.tableData[index].stuGrade)
+
+        this.tableData[index].stuGrade=60
+
       },
       handleDelete(index, row) {
         console.log(index, row);
@@ -85,3 +73,10 @@
     },
   }
 </script>
+<style lang="scss">
+.box_banner{
+  width:600px;
+  height:600px;
+  background-color: red;
+}
+</style>
