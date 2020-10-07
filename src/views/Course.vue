@@ -69,29 +69,6 @@
           <el-table-column prop="address" label="地址"> </el-table-column>
         </el-table>
       </el-main>
-      <el-aside width="20%">
-        <el-row :gutter="0">
-          <el-col :span="20">
-            <div>
-              <el-button class="tablebutton">添加</el-button>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="0">
-          <el-col :span="20">
-            <div>
-              <el-button class="tablebutton">编辑</el-button>
-            </div>
-          </el-col>
-        </el-row>
-        <el-row :gutter="0">
-          <el-col :span="20">
-            <div>
-              <el-button class="tablebutton">删除</el-button>
-            </div>
-          </el-col>
-        </el-row>
-      </el-aside>
     </el-container>
   </div>
 </template>
@@ -211,13 +188,13 @@ export default {
   border-radius: 4px;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  background: #ffffff;
 }
 .bg-purple {
-  background: #d3dce6;
+  background: #fff;
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  background: #fff;
 }
 .grid-content {
   border-radius: 4px;
