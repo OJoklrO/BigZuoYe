@@ -31,16 +31,21 @@
         <el-button
           size="mini"
           @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
       </template>
     </el-table-column>
   </el-table>
-  <div class="box_banner">
-    <input type="text" placeholder="请输入成绩" v-model="grade">
-  </div>
+  <!-- 弹出框 -->
+  <el-dialog title="成绩录入" :visible.sync="dialogVisible">
+    <el-form :model="form" @submit.native.prevent>
+      <el-form-item label="分数" :label-width="formLabelWidth">
+        <el-input v-model="grade" autocomplete="off" @keyup.enter.native="submit_form()"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="submit_form">确 定</el-button>
+    </div>
+  </el-dialog>
 </div>
   
 </template>
@@ -54,7 +59,13 @@
     data() {
       return {
         search: '',
-        grade:""
+        grade:"",
+        item_index:-1,
+        dialogVisible:false,
+        form: {
+          
+        },
+        formLabelWidth: '120px'
       }
     },
     methods: {
@@ -63,9 +74,18 @@
         console.log(row);
         // 实现改变成绩操作
         console.log(this.tableData[index].stuGrade)
-
-        this.tableData[index].stuGrade=60
-
+        this.dialogVisible=true;
+        this.item_index=index
+        // 把grade赋值给学生
+        
+        // this.tableData[index].stuGrade=this.grade;
+        // this.grade=""
+      },
+      submit_form(){
+          this.tableData[this.item_index].stuGrade=this.grade;
+          this.dialogVisible = false
+          this.grade=""
+          console.log("chenggong")
       },
       handleDelete(index, row) {
         console.log(index, row);
@@ -73,10 +93,3 @@
     },
   }
 </script>
-<style lang="scss">
-.box_banner{
-  width:600px;
-  height:600px;
-  background-color: red;
-}
-</style>

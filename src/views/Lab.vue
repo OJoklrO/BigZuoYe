@@ -8,24 +8,75 @@
     <!-- 表格 -->
     <my-table-room></my-table-room>
     <!-- 按钮 -->
-    <el-button round class="add_button">
+    <el-button round class="add_button" @click="dialogVisible = true">
       <i class="el-icon-plus"></i>
       添加
     </el-button>
-    <el-button round class="edit_button">
-      <i class="el-icon-edit"></i>
-      编辑
-    </el-button>
+    
+    <el-dialog title="添加实验" :visible.sync="dialogVisible">
+      <el-form @submit.native.prevent>
+        <el-form-item label="实验名称" :label-width="formLabelWidth">
+          <el-input v-model="message.lab_name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="实验编号" :label-width="formLabelWidth">
+          <el-input v-model="message.lab_id" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="实验时间" :label-width="formLabelWidth">
+          <el-input v-model="message.lab_time" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="实验批次" :label-width="formLabelWidth">
+          <el-input v-model="message.lab_catch" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="实验员" :label-width="formLabelWidth">
+          <el-input v-model="message.laber" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="实验人数" :label-width="formLabelWidth">
+          <el-input v-model="message.lab_number" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submit_form">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import MyTableRoom from "@/components/MyTableRoom";
 import FormLineRoom from "@/components/FormLineRoom";
+import {mapState} from "vuex";
 export default {
-components: {
+  computed: {
+        ...mapState({tableData: state => state.labroom.room_message})
+  },
+  components: {
     MyTableRoom,
     FormLineRoom
+  },
+  data() {
+    return {
+      dialogVisible:false,
+      message:{
+        lab_name:"111",
+        lab_id:"111",
+        lab_time:"111",
+        lab_catch:0,
+        laber:"111",
+        lab_number:0,
+        dialogVisible:false,
+        formLabelWidth: '80px'
+      },
+      formLabelWidth: '120px'
+    }
+  },
+  methods:{
+    submit_form(){
+      this.tableData.push(this.message)
+      this.dialogVisible = false
+      console.log(this.tableData)
+      console.log("chenggong")
+    }
   }
 };
 </script>
@@ -34,11 +85,9 @@ components: {
 .line{
   margin-bottom: 50px;
 }
-.add_button,.edit_button{
-  margin-top: 40px;
-}
 .add_button{
-  margin-left: 300px;
+  margin-left: 550px;
   margin-right: 300px;
+   margin-top: 40px;
 }
 </style>

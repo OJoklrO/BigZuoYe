@@ -11,14 +11,15 @@
     <!-- 表格 -->
     <student-table></student-table>
     <!-- 按钮 -->
-    <el-button round class="add_button">
+    <!-- <el-button round class="add_button">
       <i class="el-icon-plus"></i>
       添加
     </el-button>
     <el-button round class="edit_button">
       <i class="el-icon-edit"></i>
       编辑
-    </el-button>
+    </el-button> -->
+    <!-- 弹出框 -->
   </div>
 </template>
 
@@ -30,6 +31,7 @@ components: {
     StudentTable,
     FormLineQuery
   }
+  
 };
 </script>
 
