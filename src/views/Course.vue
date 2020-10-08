@@ -5,38 +5,56 @@
         <!-- 左1 -->
         <el-col :span="10">
           <div class="grid-content bg-purple">
-            <text-select font="课程编号：" :data="number"> </text-select>
+            <text-select
+              font="课程编号："
+              :data="idArray()"
+              :showValue="currentCourse.id"
+            >
+            </text-select>
           </div>
         </el-col>
         <el-col :span="8" :offset="6">
           <div class="grid-content bg-purple">
-            <text-with-input font="授课院系："></text-with-input>
+            <text-with-input
+              font="授课院系："
+              :content="currentCourse.department"
+            ></text-with-input>
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="0">
         <el-col :span="8" :offset="16">
           <div class="grid-content bg-purple">
-            <text-with-input font="学时："></text-with-input>
+            <text-with-input
+              font="学时："
+              :content="currentCourse.hour"
+            ></text-with-input>
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="0">
         <el-col :span="10">
           <div class="grid-content bg-purple">
-            <text-select font="课程名称：" :data="name"></text-select>
+            <text-select
+              font="课程名称："
+              :data="nameArray()"
+              :showValue="currentCourse.name"
+            ></text-select>
           </div>
         </el-col>
         <el-col :span="8" :offset="6">
           <div class="grid-content bg-purple">
-            <text-with-input font="课程班级："></text-with-input>
+            <text-with-input
+              font="课程班级："
+              :content="currentCourse.class"
+            ></text-with-input>
           </div>
         </el-col>
       </el-row>
       <el-row :gutter="0">
         <el-col :span="5">
           <div class="buttoncontainer">
-            <el-button class="titlebutton">保存</el-button>
+            <el-button class="titlebutton">添加</el-button>
           </div>
         </el-col>
         <el-col :span="5">
@@ -46,27 +64,30 @@
         </el-col>
         <el-col :span="8" :offset="6">
           <div class="grid-content bg-purple">
-            <text-with-input font="授课学期："></text-with-input>
+            <text-with-input
+              font="授课学期："
+              :content="currentCourse.term"
+            ></text-with-input>
           </div>
         </el-col>
       </el-row>
     </div>
-    <el-divider />
+    <el-divider content-position="left" style="margin: 50px 0;"
+      >课程包含实验</el-divider
+    >
     <el-container style="height: 100%">
       <el-main>
         <el-table
-          :data="tableData"
+          :data="experiments"
           style="width: 100%"
           stripe
           height="450"
-          highlight-current-row
           sortable
-        >
-          <el-table-column prop="date" label="日期" width="180">
-          </el-table-column>
-          <el-table-column prop="name" label="姓名" width="180">
-          </el-table-column>
-          <el-table-column prop="address" label="地址"> </el-table-column>
+          ><el-table-column prop="date" label="实验名称"> </el-table-column>
+          <el-table-column prop="name" label="实验时间"> </el-table-column>
+          <el-table-column prop="province" label="实验员"> </el-table-column>
+          <el-table-column prop="city" label="人数"> </el-table-column>
+          <el-table-column prop="address" label="地点"> </el-table-column>
         </el-table>
       </el-main>
     </el-container>
@@ -76,8 +97,32 @@
 <script>
 import TextSelect from "@/components/TextSelect.vue";
 import TextWithInput from "@/components/TextWithInput.vue";
+import { mapState } from "vuex";
 
 export default {
+  methods: {
+    idArray() {
+      var temp = new Array();
+      for (var i in this.courses) {
+        temp.push({ key: this.courses[i].id, label: this.courses[i].id });
+      }
+      return temp;
+    },
+    nameArray() {
+      var temp = new Array();
+      for (var i in this.courses) {
+        temp.push({ key: this.courses[i].id, label: this.courses[i].name });
+      }
+      return temp;
+    }
+  },
+  computed: {
+    ...mapState({
+      experiments: state => state.experiment.experiments,
+      courses: state => state.course.courses,
+      currentCourse: state => state.course.currentCourse
+    })
+  },
   components: {
     TextSelect,
     TextWithInput
@@ -126,28 +171,6 @@ export default {
         {
           value: 5,
           label: "实验5"
-        }
-      ],
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
         }
       ]
     };

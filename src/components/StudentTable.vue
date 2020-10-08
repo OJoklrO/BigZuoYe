@@ -91,5 +91,15 @@
         console.log(index, row);
       }
     },
+    handleDelete(index, row) {
+      console.log(index, row);
+    }
   }
 </script>
+<style lang="scss">
+.box_banner {
+  width: 600px;
+  height: 600px;
+  background-color: red;
+}
+</style>

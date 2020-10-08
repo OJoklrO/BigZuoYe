@@ -43,7 +43,8 @@
         <el-button
           @click.native.prevent="deleteRow(scope.$index, tableData)"
           type="text"
-          size="small">
+          size="small"
+        >
           移除
         </el-button>
         <el-button
@@ -114,7 +115,7 @@
   }
 </script>
 <style>
-.table{
+.table {
   width: 100px;
 }
 </style>

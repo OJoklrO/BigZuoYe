@@ -1,7 +1,11 @@
 <template>
   <div class="textwithinput">
     <a class="font">{{ font }}</a>
-    <el-input v-model="input" placeholder="请输入内容"></el-input>
+    <el-input
+      v-model="input"
+      :placeholder="content"
+      :disabled="true"
+    ></el-input>
   </div>
 </template>
 
@@ -9,6 +13,9 @@
 export default {
   props: {
     font: {
+      type: String
+    },
+    content: {
       type: String
     }
   },
