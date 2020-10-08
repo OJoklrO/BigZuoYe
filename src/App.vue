@@ -20,7 +20,7 @@ import CommonHeader from "@/components/CommonHeader";
 import CommonAside from "@/components/CommonAside";
 import BreadCrumb from "@/components/BreadCrumb";
 export default {
-components: {
+  components: {
     CommonHeader,
     CommonAside,
     BreadCrumb
