@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import tab from "./tab";
 import grade from "./grade";
+import labroom from "./labroom";
 import experiment from "./expriment";
 import course from "./course";
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
   modules: {
     tab,
     grade,
+    labroom,
     experiment,
     course
   }
