@@ -1,4 +1,3 @@
-
 <template>
   <div class="banner">
     <div class="header">
@@ -27,30 +26,30 @@
 import StudentTable from "@/components/StudentTable";
 import FormLineQuery from "@/components/FormLineQuery";
 export default {
-components: {
+  components: {
     StudentTable,
     FormLineQuery
   }
-  
 };
 </script>
 
 <style lang="scss" scoped>
-.line{
+.line {
   margin-bottom: 50px;
 }
-.add_button,.edit_button{
+.add_button,
+.edit_button {
   margin-top: 40px;
 }
-.add_button{
+.add_button {
   margin-left: 300px;
   margin-right: 300px;
 }
-.query_title{
+.query_title {
   font-weight: bolder;
   font-size: 30px;
   text-align: center;
-  color: rgb(144,147,153);
+  color: rgb(144, 147, 153);
   margin-bottom: 30px;
 }
 </style>

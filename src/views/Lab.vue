@@ -4,7 +4,9 @@
       <!-- 搜索 -->
       <form-line-room></form-line-room>
     </div>
-    <el-divider content-position="left" style="margin: 50px 0;" class="line">实验室信息</el-divider>
+    <el-divider content-position="left" style="margin: 50px 0;" class="line"
+      >实验室信息</el-divider
+    >
     <!-- 表格 -->
     <my-table-room></my-table-room>
     <!-- 按钮 -->
@@ -12,7 +14,7 @@
       <i class="el-icon-plus"></i>
       添加
     </el-button>
-    
+
     <el-dialog title="添加实验" :visible.sync="dialogVisible">
       <el-form @submit.native.prevent>
         <el-form-item label="实验名称" :label-width="formLabelWidth">
@@ -45,10 +47,10 @@
 <script>
 import MyTableRoom from "@/components/MyTableRoom";
 import FormLineRoom from "@/components/FormLineRoom";
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 export default {
   computed: {
-        ...mapState({tableData: state => state.labroom.room_message})
+    ...mapState({ tableData: state => state.labroom.room_message })
   },
   components: {
     MyTableRoom,
@@ -56,38 +58,38 @@ export default {
   },
   data() {
     return {
-      dialogVisible:false,
-      message:{
-        lab_name:"111",
-        lab_id:"111",
-        lab_time:"111",
-        lab_catch:0,
-        laber:"111",
-        lab_number:0,
-        dialogVisible:false,
-        formLabelWidth: '80px'
+      dialogVisible: false,
+      message: {
+        lab_name: "111",
+        lab_id: "111",
+        lab_time: "111",
+        lab_catch: 0,
+        laber: "111",
+        lab_number: 0,
+        dialogVisible: false,
+        formLabelWidth: "80px"
       },
-      formLabelWidth: '120px'
-    }
+      formLabelWidth: "120px"
+    };
   },
-  methods:{
-    submit_form(){
-      this.tableData.push(this.message)
-      this.dialogVisible = false
-      console.log(this.tableData)
-      console.log("chenggong")
+  methods: {
+    submit_form() {
+      this.tableData.push(this.message);
+      this.dialogVisible = false;
+      console.log(this.tableData);
+      console.log("chenggong");
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.line{
+.line {
   margin-bottom: 50px;
 }
-.add_button{
+.add_button {
   margin-left: 550px;
   margin-right: 300px;
-   margin-top: 40px;
+  margin-top: 40px;
 }
 </style>
