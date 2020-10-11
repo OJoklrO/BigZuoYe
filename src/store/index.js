@@ -5,6 +5,7 @@ import grade from "./grade";
 import labroom from "./labroom";
 import experiment from "./expriment";
 import course from "./course";
+import user from "./user";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     grade,
     labroom,
     experiment,
-    course
+    course,
+    user
   }
 });

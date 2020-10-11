@@ -3,7 +3,7 @@
    <el-table class="table"
     :data="tableData"
     style="width: 100%"
-    height="500">
+    max-height="500">
     <el-table-column
       fixed
       prop="lab_name"
@@ -56,25 +56,25 @@
       </template>
     </el-table-column>
   </el-table>
-  <el-dialog title="添加实验" :visible.sync="dialogVisible">
+  <el-dialog title="编辑实验" :visible.sync="dialogVisible">
       <el-form @submit.native.prevent>
         <el-form-item label="实验名称" :label-width="formLabelWidth">
-          <el-input v-model="tableData[index_all].lab_name" autocomplete="off"></el-input>
+          <el-input v-model="message.lab_name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="实验编号" :label-width="formLabelWidth">
-          <el-input v-model="tableData[index_all].lab_id" autocomplete="off"></el-input>
+          <el-input v-model="message.lab_id" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="实验时间" :label-width="formLabelWidth">
-          <el-input v-model="tableData[index_all].lab_time" autocomplete="off"></el-input>
+          <el-input v-model="message.lab_time" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="实验批次" :label-width="formLabelWidth">
-          <el-input v-model="tableData[index_all].lab_catch" autocomplete="off"></el-input>
+          <el-input v-model="message.lab_catch" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="实验员" :label-width="formLabelWidth">
-          <el-input v-model="tableData[index_all].laber" autocomplete="off"></el-input>
+          <el-input v-model="message.laber" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="实验人数" :label-width="formLabelWidth">
-          <el-input v-model="tableData[index_all].lab_number" autocomplete="off"></el-input>
+          <el-input v-model="message.lab_number" autocomplete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -99,9 +99,15 @@
       postRow(index,rows){
         console.log(index)
         console.log(rows)
+        this.message=this.tableData[index]
         this.index_all=index
         this.dialogVisible=true
 
+      },
+      edit_form(){
+        this.$store.commit("editLab",{message:this.message,index:this.index_all})
+        // 把message属性清空
+        
       }
     },
     data() {
@@ -109,13 +115,17 @@
         dialogVisible:false,
         formLabelWidth:"120px",
         index_all:0,
-        rows_all:[]
+        rows_all:[],
+        message:{
+          lab_name:"",
+          lab_id:"",
+          lab_time:"",
+          lab_catch:1,
+          laber:"",
+          lab_number:1
+        }
       }
     }
   }
 </script>
-<style>
-.table {
-  width: 100px;
-}
-</style>
+

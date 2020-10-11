@@ -36,9 +36,9 @@
   </el-table>
   <!-- 弹出框 -->
   <el-dialog title="成绩录入" :visible.sync="dialogVisible">
-    <el-form :model="form" @submit.native.prevent>
+    <el-form @submit.native.prevent>
       <el-form-item label="分数" :label-width="formLabelWidth">
-        <el-input v-model="grade" autocomplete="off" @keyup.enter.native="submit_form()"></el-input>
+        <el-input v-model="grade" autocomplete="off" @keyup.enter.native.prevent="submit_form()"></el-input>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -60,11 +60,8 @@
       return {
         search: '',
         grade:"",
-        item_index:-1,
+        item_index:0,
         dialogVisible:false,
-        form: {
-          
-        },
         formLabelWidth: '120px'
       }
     },
@@ -76,16 +73,17 @@
         console.log(this.tableData[index].stuGrade)
         this.dialogVisible=true;
         this.item_index=index
+        console.log(this.item_index)
         // 把grade赋值给学生
         
         // this.tableData[index].stuGrade=this.grade;
         // this.grade=""
       },
       submit_form(){
-          this.tableData[this.item_index].stuGrade=this.grade;
+          this.$store.commit("editGrade",{grade:this.grade,index:this.item_index})
           this.dialogVisible = false
           this.grade=""
-          console.log("chenggong")
+          console.log(this.item_index)
       },
       handleDelete(index, row) {
         console.log(index, row);

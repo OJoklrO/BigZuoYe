@@ -61,8 +61,8 @@
         console.log(this.current_laber);
         console.log(this.current_batch);
         // 编写筛选函数获得query_message对象
-
-
+        
+        // 向vuex提交数据
         var temp = []
         temp=this.query_message
         this.$store.commit("SetGrade", temp)

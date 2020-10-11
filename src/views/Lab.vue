@@ -8,11 +8,12 @@
     <!-- 表格 -->
     <my-table-room></my-table-room>
     <!-- 按钮 -->
-    <el-button round class="add_button" @click="dialogVisible = true">
-      <i class="el-icon-plus"></i>
-      添加
-    </el-button>
-    
+    <div class="btn_banner">
+      <el-button round class="add_button" @click="dialogVisible = true">
+        <i class="el-icon-plus"></i>
+        添加
+      </el-button>
+    </div>
     <el-dialog title="添加实验" :visible.sync="dialogVisible">
       <el-form @submit.native.prevent>
         <el-form-item label="实验名称" :label-width="formLabelWidth">
@@ -58,11 +59,11 @@ export default {
     return {
       dialogVisible:false,
       message:{
-        lab_name:"111",
-        lab_id:"111",
-        lab_time:"111",
+        lab_name:"",
+        lab_id:"",
+        lab_time:"",
         lab_catch:0,
-        laber:"111",
+        laber:"",
         lab_number:0,
         dialogVisible:false,
         formLabelWidth: '80px'
@@ -72,10 +73,11 @@ export default {
   },
   methods:{
     submit_form(){
-      this.tableData.push(this.message)
+      this.$store.commit("addLab",this.message)
       this.dialogVisible = false
-      console.log(this.tableData)
-      console.log("chenggong")
+      // console.log(this.tableData)
+      // console.log("chenggong")
+      
     }
   }
 };
@@ -85,9 +87,12 @@ export default {
 .line{
   margin-bottom: 50px;
 }
+.btn_banner{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
 .add_button{
-  margin-left: 550px;
-  margin-right: 300px;
-   margin-top: 40px;
+  margin-top: 40px;
 }
 </style>

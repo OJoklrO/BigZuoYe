@@ -4,7 +4,7 @@
       <span class="title">用户登录</span>
       <div class="banner1">
         <span>用户名</span>
-        <el-input v-model="user_name" placeholder="请输入内容"></el-input>
+        <el-input v-model="user_name" placeholder="请输入账号"></el-input>
       </div>
       <div class="banner2">
         <span>密码</span>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import {mapState} from "vuex"
   export default {
     data() {
       return {
@@ -28,11 +29,31 @@
         password : ""
       }
     },
+    computed:{
+        ...mapState({userList: state=>state.user.userList})
+    },
     methods:{
       login(){
         // 如果密码用户名正确则正常登录
         // this.visible=false
-        this.$router.push({ path:'course'  })
+        // console.log(this.$router)
+        // this.$router.push({ path:'course'  })
+        // console.log(this.userList)
+        var flag=false
+        for(var item in this.userList){
+          // console.log(item)
+          if( this.userList[item].userName==this.user_name && this.userList[item].password==this.password){
+            this.$router.push({ path:'course'  })
+            console.log("登录成功")
+            flag=true
+            break
+          }
+        }
+        if(flag==false){
+          alert("登陆失败")
+          this.user_name=''
+          this.password=''
+        }
 
         // 用户名不存在
         //alert("用户名不存在 , 请先注册")

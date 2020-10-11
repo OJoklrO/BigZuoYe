@@ -22,8 +22,8 @@
         room_capcity:"22",
         room_list:["G123","G234","G345"],
         message:[{
-          lab_name:"111",
-          lab_id:"111",
+          lab_name:"123",
+          lab_id:"123",
           lab_time:"111",
           lab_catch:0,
           laber:"111",

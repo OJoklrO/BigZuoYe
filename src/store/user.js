@@ -1,6 +1,15 @@
 export default {
   state: {
-    user: {}
+    userList:[
+      {
+        userName:"18130500078",
+        password:"123456"
+      },
+      {
+        userName:"877494093",
+        password:"234567"
+      }
+    ]
   },
   mutations: {
     SignIn(state, val) {
