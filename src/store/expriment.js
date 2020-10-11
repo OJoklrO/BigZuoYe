@@ -60,8 +60,8 @@ export default {
     ]
   },
   mutations: {
-    SetGrade(state, val) {
-      state.experiment = val;
+    AddExperiment(state, val) {
+      state.experiments.push(val);
     }
   },
   actions: {}
