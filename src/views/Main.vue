@@ -8,13 +8,16 @@
       </div>
       <div class="banner2">
         <span>密码</span>
-        <el-input placeholder="请输入密码" v-model="password" show-password></el-input>
+        <el-input
+          placeholder="请输入密码"
+          v-model="password"
+          show-password
+        ></el-input>
       </div>
       <div class="btn_banner">
         <el-button size="small" round @click="login">登录</el-button>
         <el-button size="small" round>注册</el-button>
       </div>
-      
     </el-card>
   </div>
 </template>
@@ -55,17 +58,17 @@
           this.password=''
         }
 
-        // 用户名不存在
-        //alert("用户名不存在 , 请先注册")
-        // 密码错误
-        //alert("密码错误")
-      }
+      // 用户名不存在
+      //alert("用户名不存在 , 请先注册")
+      // 密码错误
+      //alert("密码错误")
     }
   }
+};
 </script>
 
 <style lang="scss">
-.login_title{
+.login_title {
   width: 400px;
   height: 280px;
   // display: flex;
@@ -75,31 +78,33 @@
   font-size: larger;
   margin-left: 400px;
   margin-top: 50px;
-  
 }
-.el-card__body{
+.el-card__body {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: bolder;
   flex-direction: column;
 }
-.banner1,.banner2{
+.banner1,
+.banner2 {
   display: flex;
   justify-content: space-around;
   margin: 30px 0;
 }
-.banner2{
+.banner2 {
   margin-top: 0;
 }
-.banner1 input,.banner2 input{
+.banner1 input,
+.banner2 input {
   width: 250px;
 }
-.banner1 span,.banner2 span{
+.banner1 span,
+.banner2 span {
   width: 100px;
   line-height: 40px;
 }
-.btn_banner{
+.btn_banner {
   display: flex;
   justify-content: space-between;
   width: 200px;

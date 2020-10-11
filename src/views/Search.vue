@@ -1,4 +1,3 @@
-
 <template>
   <div class="banner">
     <div class="header">
@@ -17,13 +16,11 @@
 import FormLineCha from "@/components/FormLineCha";
 import TableCha from "@/components/TableCha";
 export default {
-components: {
+  components: {
     FormLineCha,
     TableCha
   }
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

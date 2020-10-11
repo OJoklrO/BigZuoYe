@@ -4,7 +4,9 @@
       <!-- 搜索 -->
       <form-line-room></form-line-room>
     </div>
-    <el-divider content-position="left" style="margin: 50px 0;" class="line">实验室信息</el-divider>
+    <el-divider content-position="left" style="margin: 50px 0;" class="line"
+      >实验室信息</el-divider
+    >
     <!-- 表格 -->
     <my-table-room></my-table-room>
     <!-- 按钮 -->
@@ -46,10 +48,10 @@
 <script>
 import MyTableRoom from "@/components/MyTableRoom";
 import FormLineRoom from "@/components/FormLineRoom";
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 export default {
   computed: {
-        ...mapState({tableData: state => state.labroom.room_message})
+    ...mapState({ tableData: state => state.labroom.room_message })
   },
   components: {
     MyTableRoom,
@@ -68,8 +70,8 @@ export default {
         dialogVisible:false,
         formLabelWidth: '80px'
       },
-      formLabelWidth: '120px'
-    }
+      formLabelWidth: "120px"
+    };
   },
   methods:{
     submit_form(){
@@ -84,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.line{
+.line {
   margin-bottom: 50px;
 }
 .btn_banner{

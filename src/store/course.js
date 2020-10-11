@@ -31,6 +31,9 @@ export default {
       }
       state.temp = 1;
     },
+    AddCourse(state, val) {
+      state.courses.push(val);
+    },
     DecreaseTemp(state) {
       state.temp = 0;
     }

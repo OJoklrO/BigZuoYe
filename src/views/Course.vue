@@ -54,12 +54,20 @@
       <el-row :gutter="0">
         <el-col :span="5">
           <div class="buttoncontainer">
-            <el-button class="titlebutton">添加</el-button>
+            <el-button
+              type="primary"
+              round
+              class="titlebutton"
+              @click="dialogVisable = true"
+              ><i class="el-icon-plus"></i>添加
+            </el-button>
           </div>
         </el-col>
         <el-col :span="5">
           <div class="buttoncontainer">
-            <el-button class="titlebutton">删除</el-button>
+            <el-button round class="titlebutton"
+              ><i class="el-icon-delete" />删除</el-button
+            >
           </div>
         </el-col>
         <el-col :span="8" :offset="6">
@@ -71,10 +79,39 @@
           </div>
         </el-col>
       </el-row>
+      <el-dialog title="添加课程信息" :visible.sync="dialogVisable">
+        <el-form @submit.native.prevent>
+          <el-form-item label="课程名称" :label-width="formLabelWidth">
+            <el-input v-model="tempCourse.name" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="课程编号" :label-width="formLabelWidth">
+            <el-input v-model="tempCourse.id" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="授课院系" :label-width="formLabelWidth">
+            <el-input
+              v-model="tempCourse.department"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="学时" :label-width="formLabelWidth">
+            <el-input v-model="tempCourse.hour" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="课程班级" :label-width="formLabelWidth">
+            <el-input v-model="tempCourse.class" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="授课学期" :label-width="formLabelWidth">
+            <el-input v-model="tempCourse.term" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisable = false">取 消</el-button>
+          <el-button type="primary" @click="dialogOK">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
-    <el-divider content-position="left" style="margin: 50px 0;"
-      >课程包含实验</el-divider
-    >
+    <el-divider content-position="left" style="margin: 50px 0;">
+      课程包含实验
+    </el-divider>
     <el-container style="height: 100%">
       <el-main>
         <el-table
@@ -114,6 +151,29 @@ export default {
         temp.push({ key: this.courses[i].id, label: this.courses[i].name });
       }
       return temp;
+    },
+    checkTempNull() {
+      if (
+        this.tempCourse.name == "" ||
+        this.tempCourse.id == "" ||
+        this.tempCourse.hour == "" ||
+        this.tempCourse.department == "" ||
+        this.tempCourse.term == "" ||
+        this.tempCourse.class == ""
+      )
+        return false;
+      return true;
+    },
+    saveCourse() {
+      for (var i in this.courses) {
+        if (this.tempCourse.id === this.courses[i].id) return;
+      }
+      this.$store.commit("AddCourse", this.tempCourse);
+    },
+    dialogOK() {
+      if (!this.checkTempNull()) return;
+      this.saveCourse();
+      this.dialogVisable = false;
     }
   },
   computed: {
@@ -129,50 +189,16 @@ export default {
   },
   data() {
     return {
-      number: [
-        {
-          value: 1,
-          label: "黄金糕"
-        },
-        {
-          value: 2,
-          label: "双皮奶"
-        },
-        {
-          value: 3,
-          label: "蚵仔煎"
-        },
-        {
-          value: 4,
-          label: "龙须面"
-        },
-        {
-          value: 5,
-          label: "北京烤鸭"
-        }
-      ],
-      name: [
-        {
-          value: 1,
-          label: "实验1"
-        },
-        {
-          value: 2,
-          label: "实验2"
-        },
-        {
-          value: 3,
-          label: "实验3"
-        },
-        {
-          value: 4,
-          label: "实验4"
-        },
-        {
-          value: 5,
-          label: "实验5"
-        }
-      ]
+      dialogVisable: false,
+      tempCourse: {
+        id: "",
+        name: "",
+        hour: "",
+        department: "",
+        class: "",
+        term: ""
+      },
+      formLabelWidth: "120px"
     };
   }
 };
@@ -194,7 +220,7 @@ export default {
 
 .titlebutton {
   height: 80%;
-  width: 80%;
+  width: 40%;
 }
 
 .buttoncontainer {
