@@ -1,23 +1,57 @@
 export default {
   state: {
-    userList:[
+    username: "",
+    userauthority: 0,
+    randerList: [],
+    asideMenu: [
       {
-        userName:"18130500078",
-        password:"123456"
+        path: "/course",
+        label: "课程管理",
+        icon: "date",
+        authority: 1
       },
       {
-        userName:"877494093",
-        password:"234567"
+        path: "/labmanager",
+        label: "实验管理",
+        icon: "tickets",
+        authority: 1
+      },
+      {
+        path: "/lab",
+        label: "实验室管理",
+        icon: "postcard",
+        authority: 1
+      },
+      {
+        path: "/addachieve",
+        label: "成绩录入",
+        icon: "right",
+        authority: 2
+      },
+      {
+        path: "/search",
+        label: "成绩查询",
+        icon: "search",
+        authority: 3
       }
-    ],
-    test_list:[]
+    ]
   },
   mutations: {
     SignIn(state, val) {
-      state.user = val;
+      state.username = String(val.username);
+      state.userauthority = Number(val.auth);
+      for (var i in state.asideMenu) {
+        if (
+          state.asideMenu[i].authority == val.auth ||
+          state.asideMenu[i].authority == 3
+        )
+          state.randerList.push(state.asideMenu[i]);
+      }
     },
     SignOut(state) {
-      state.user = null;
+      state.username = "";
+      state.userauthority = 0;
+      state.asideMenu = [];
     }
   },
   actions: {}

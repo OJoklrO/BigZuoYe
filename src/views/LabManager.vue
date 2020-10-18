@@ -9,7 +9,7 @@
       >实验管理</el-divider
     >
     <!-- 显示 -->
-    <div class="lab_tag">
+    <!-- <div class="lab_tag">
       <div class="labcard">
         <span class="lab_text" style="color:rgb(144,147,153);">实验学期</span>
         <div class="bor"></div>
@@ -18,7 +18,7 @@
         <span class="lab_text" style="color:rgb(144,147,153);">实验总人数</span>
         <div class="bor"></div>
       </div>
-    </div>
+    </div> -->
     <!-- 表格 -->
     <my-table-lab></my-table-lab>
     <!-- 按钮 -->
@@ -26,10 +26,10 @@
       <i class="el-icon-plus"></i>
       添加
     </el-button>
-    <el-button round class="edit_button">
-      <i class="el-icon-edit"></i>
-      编辑
-    </el-button>
+    <!-- <el-button round class="dele_button">
+      <i class="el-icon-delete"></i>
+      删除
+    </el-button> -->
   </div>
 </template>
 
@@ -37,6 +37,25 @@
 import MyTableLab from "@/components/MyTableLab";
 import FormLineLab from "@/components/FormLineLab";
 export default {
+  beforeMount() {
+    this.freshCourse();
+  },
+  methods: {
+    freshCourse() {
+      this.$http
+        .post("http://182.92.122.205:8080/", "gettable=course")
+        .then(res => {
+          var str = res.data;
+          console.log(res.data);
+          str = str.replace(/'/g, '"');
+          var result = JSON.parse(str);
+          this.$store.commit("SetCourseArray", result);
+          // var res1=JSON.parse(str)
+          // console.log(res1)
+          //var str1 = unescape(str.replace(/\\u/g, "%u"));
+        });
+    }
+  },
   components: {
     MyTableLab,
     FormLineLab
@@ -68,7 +87,7 @@ export default {
   margin-top: 40px;
 }
 .add_button {
-  margin-left: 300px;
+  // margin-left: 500px;
   margin-right: 300px;
 }
 </style>

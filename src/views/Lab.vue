@@ -59,27 +59,26 @@ export default {
   },
   data() {
     return {
-      dialogVisible:false,
-      message:{
-        lab_name:"",
-        lab_id:"",
-        lab_time:"",
-        lab_catch:0,
-        laber:"",
-        lab_number:0,
-        dialogVisible:false,
-        formLabelWidth: '80px'
+      dialogVisible: false,
+      message: {
+        lab_name: "",
+        lab_id: "",
+        lab_time: "",
+        lab_catch: 0,
+        laber: "",
+        lab_number: 0,
+        dialogVisible: false,
+        formLabelWidth: "80px"
       },
       formLabelWidth: "120px"
     };
   },
-  methods:{
-    submit_form(){
-      this.$store.commit("addLab",this.message)
-      this.dialogVisible = false
+  methods: {
+    submit_form() {
+      this.$store.commit("addLab", this.message);
+      this.dialogVisible = false;
       // console.log(this.tableData)
       // console.log("chenggong")
-      
     }
   }
 };
@@ -89,12 +88,12 @@ export default {
 .line {
   margin-bottom: 50px;
 }
-.btn_banner{
+.btn_banner {
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
-.add_button{
+.add_button {
   margin-top: 40px;
 }
 </style>

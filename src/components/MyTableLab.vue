@@ -5,11 +5,11 @@
     style="width: 100%"
     max-height="330"
   >
-    <el-table-column fixed prop="date" label="实验名称"> </el-table-column>
-    <el-table-column prop="name" label="实验时间"> </el-table-column>
-    <el-table-column prop="province" label="实验员"> </el-table-column>
-    <el-table-column prop="city" label="人数"> </el-table-column>
-    <el-table-column prop="address" label="地点"> </el-table-column>
+    <el-table-column prop="exp_name" label="实验名称"> </el-table-column>
+    <el-table-column prop="time" label="实验时间"> </el-table-column>
+    <el-table-column prop="exp_tc" label="实验员"> </el-table-column>
+    <el-table-column prop="num" label="人数"> </el-table-column>
+    <el-table-column prop="room" label="实验室"> </el-table-column>
     <el-table-column fixed="right" label="操作">
       <template slot-scope="scope">
         <el-button

@@ -1,62 +1,43 @@
 <template>
-<div>
-   <el-table class="table"
-    :data="tableData"
-    style="width: 100%"
-    max-height="500">
-    <el-table-column
-      fixed
-      prop="lab_name"
-      label="实验名称"
-      width="150">
-    </el-table-column>
-    <el-table-column
-      prop="lab_id"
-      label="实验编号"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="lab_time"
-      label="实验时间"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="lab_catch"
-      label="实验批次"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="laber"
-      label="实验员"
-      width="300">
-    </el-table-column>
-    <el-table-column
-      prop="lab_number"
-      label="实验人数"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      fixed="right"
-      label="操作"
-      width="120">
-      <template slot-scope="scope">
-        <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
-          type="text"
-          size="small"
-        >
-          移除
-        </el-button>
-        <el-button
-          @click.native.prevent="postRow(scope.$index, tableData)"
-          type="text"
-          size="small">
-          编辑
-        </el-button>
-      </template>
-    </el-table-column>
-  </el-table>
-  <el-dialog title="编辑实验" :visible.sync="dialogVisible">
+  <div>
+    <el-table
+      class="table"
+      :data="tableData"
+      style="width: 100%"
+      max-height="500"
+    >
+      <el-table-column fixed prop="lab_name" label="实验名称" width="150">
+      </el-table-column>
+      <el-table-column prop="lab_id" label="实验编号" width="120">
+      </el-table-column>
+      <el-table-column prop="lab_time" label="实验时间" width="120">
+      </el-table-column>
+      <el-table-column prop="lab_catch" label="实验批次" width="120">
+      </el-table-column>
+      <el-table-column prop="laber" label="实验员" width="300">
+      </el-table-column>
+      <el-table-column prop="lab_number" label="实验人数" width="120">
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="120">
+        <template slot-scope="scope">
+          <el-button
+            @click.native.prevent="deleteRow(scope.$index, tableData)"
+            type="text"
+            size="small"
+          >
+            移除
+          </el-button>
+          <el-button
+            @click.native.prevent="postRow(scope.$index, tableData)"
+            type="text"
+            size="small"
+          >
+            编辑
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-dialog title="编辑实验" :visible.sync="dialogVisible">
       <el-form @submit.native.prevent>
         <el-form-item label="实验名称" :label-width="formLabelWidth">
           <el-input v-model="message.lab_name" autocomplete="off"></el-input>
@@ -88,45 +69,45 @@
 </template>
 
 <script>
-  import {mapState} from "vuex"
-  export default {
-     computed: {
-        ...mapState({tableData: state => state.labroom.room_message})
-     },
-    methods: {
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
-      postRow(index,rows){
-        console.log(index)
-        console.log(rows)
-        this.message=this.tableData[index]
-        this.index_all=index
-        this.dialogVisible=true
-
-      },
-      edit_form(){
-        this.$store.commit("editLab",{message:this.message,index:this.index_all})
-        // 把message属性清空
-        
-      }
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState({ tableData: state => state.labroom.room_message })
+  },
+  methods: {
+    deleteRow(index, rows) {
+      rows.splice(index, 1);
     },
-    data() {
-      return {
-        dialogVisible:false,
-        formLabelWidth:"120px",
-        index_all:0,
-        rows_all:[],
-        message:{
-          lab_name:"",
-          lab_id:"",
-          lab_time:"",
-          lab_catch:1,
-          laber:"",
-          lab_number:1
-        }
-      }
+    postRow(index, rows) {
+      console.log(index);
+      console.log(rows);
+      this.message = this.tableData[index];
+      this.index_all = index;
+      this.dialogVisible = true;
+    },
+    edit_form() {
+      this.$store.commit("editLab", {
+        message: this.message,
+        index: this.index_all
+      });
+      // 把message属性清空
     }
+  },
+  data() {
+    return {
+      dialogVisible: false,
+      formLabelWidth: "120px",
+      index_all: 0,
+      rows_all: [],
+      message: {
+        lab_name: "",
+        lab_id: "",
+        lab_time: "",
+        lab_catch: 1,
+        laber: "",
+        lab_number: 1
+      }
+    };
   }
+};
 </script>
-

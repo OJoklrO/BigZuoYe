@@ -23,53 +23,61 @@
 </template>
 
 <script>
-  import {mapState} from "vuex"
-  export default {
-    data() {
-      return {
-        visible:true,
-        user_name: '',
-        password : ""
-      }
-    },
-    computed:{
-        ...mapState({userList: state=>state.user.userList})
-    },
-    methods:{
-      login(){
-        this.$http.post("http://182.92.122.205:8080/","sqltype=1&id=15054039").then(res=>{
-          var str=res.data
+import { mapState } from "vuex";
+export default {
+  data() {
+    return {
+      visible: true,
+      user_name: "",
+      password: "",
+      auth: 0
+    };
+  },
+  computed: {
+    ...mapState({ userList: state => state.user.userList })
+  },
+  methods: {
+    login() {
+      this.$http
+        .post(
+          "http://182.92.122.205:8080/",
+          "user=" + this.user_name + "&passwd=" + this.password
+        )
+        .then(res => {
+          var authttt = Number(res.data.toString());
+          this.auth = authttt;
+          var obj = {};
+          obj.username = this.user_name;
+          obj.auth = this.auth;
+          if (this.auth != 0) {
+            this.$store.commit("SignIn", obj);
+          }
           // var res1=JSON.parse(str)
           // console.log(res1)
-          var str1 = unescape(str.replace(/\\u/g, "%u"));
-          console.log(str1)
-          console.log(res.data)
-          console.log("chenggong")
-        })
+          //var str1 = unescape(str.replace(/\\u/g, "%u"));
+        });
 
+      // 如果密码用户名正确则正常登录
+      // this.visible=false
+      // console.log(this.$router)
+      // this.$router.push({ path:'course'  })
+      // console.log(this.userList)
 
-
-        // 如果密码用户名正确则正常登录
-        // this.visible=false
-        // console.log(this.$router)
-        // this.$router.push({ path:'course'  })
-        // console.log(this.userList)
-
-        // var flag=false
-        // for(var item in this.userList){
-        //   // console.log(item)
-        //   if( this.userList[item].userName==this.user_name && this.userList[item].password==this.password){
-        //     this.$router.push({ path:'course'  })
-        //     console.log("登录成功")
-        //     flag=true
-        //     break
-        //   }
-        // }
-        // if(flag==false){
-        //   alert("登陆失败")
-        //   this.user_name=''
-        //   this.password=''
-        // }
+      // var flag=false
+      // for(var item in this.userList){
+      //   // console.log(item)
+      //   if( this.userList[item].userName==this.user_name && this.userList[item].password==this.password){
+      //     this.$router.push({ path:'course'  })
+      //     console.log("登录成功")
+      //     flag=true
+      //     break
+      //   }
+      // }
+      // if(flag==false){
+      //   alert("登陆失败")
+      //   this.user_name=''
+      //   this.password=''
+      // }
     }
   }
 };

@@ -13,65 +13,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   computed: {
-    randerList: function() {
-      // var list = new Array();
-      // if (this.$store.state.user == null) 
-      return this.asideMenu;
-
-      // for (var i in this.asideMenu) {
-      //   if (
-      //     this.asideMenu[i].authority == 1 ||
-      //     this.asideMenu[i].authority == 3
-      //   )
-      //     list.push(this.asideMenu[i]);
-      // }
-
-      // return list;
-    }
+    ...mapState({
+      authority: state => state.user.userauthority,
+      randerList: state => state.user.randerList
+    })
   },
   methods: {
     ClickMenu(item) {
       this.$store.commit("selectMenu", item);
       this.$router.push(item);
     }
-  },
-  data() {
-    return {
-      asideMenu: [
-        {
-          path: "/course",
-          label: "课程管理",
-          icon: "date",
-          authority: 1
-        },
-        {
-          path: "/labmanager",
-          label: "实验管理",
-          icon: "tickets",
-          authority: 1
-        },
-        {
-          path: "/lab",
-          label: "实验室管理",
-          icon: "postcard",
-          authority: 1
-        },
-        {
-          path: "/addachieve",
-          label: "成绩录入",
-          icon: "right",
-          authority: 2
-        },
-        {
-          path: "/search",
-          label: "成绩查询",
-          icon: "search",
-          authority: 3
-        }
-      ]
-    };
   }
 };
 </script>

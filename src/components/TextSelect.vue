@@ -17,6 +17,24 @@ export default {
   methods: {
     onValueChange() {
       this.$store.commit("SetCurrentCourse", this.value);
+      this.$http
+        .post(
+          "http://182.92.122.205:8080/",
+          "sql=select-exp_name,time,exp_tc,num,room-from-experiment-natural-join-exp_time-natural-join-teacher-where-course_id=" +
+            this.value +
+            ";"
+        )
+        .then(res => {
+          var str = res.data;
+          var result;
+          if (String(str) != "") {
+            str = str.replace(/'/g, '"');
+            result = JSON.parse(str);
+          } else {
+            result = [];
+          }
+          this.$store.commit("SetExperiment", result);
+        });
     }
   },
   props: {

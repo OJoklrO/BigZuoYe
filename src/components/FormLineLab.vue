@@ -1,11 +1,7 @@
 <template>
   <el-form :inline="true" :model="formInline" class="demo-form-inline">
     <el-form-item label="课程名称" class="room_search">
-      <el-select
-        v-model="currentCourse.name"
-        placeholder="实验名称"
-        @change="onValueChange"
-      >
+      <el-select v-model="value" placeholder="实验名称" @change="onValueChange">
         <el-option
           v-for="item in nameArray()"
           :key="item.key"
@@ -13,8 +9,8 @@
           :value="item.key"
       /></el-select>
     </el-form-item>
-    <el-form-item label="课程编号" class="room_search" @change="onValueChange">
-      <el-select v-model="currentCourse.id" placeholder="实验编号">
+    <el-form-item label="课程编号" class="room_search">
+      <el-select v-model="value" placeholder="实验编号" @change="onValueChange">
         <el-option
           v-for="item in idArray()"
           :key="item.key"
@@ -43,7 +39,8 @@ export default {
       formInline: {
         user: "",
         region: ""
-      }
+      },
+      value: ""
     };
   },
   methods: {
@@ -53,19 +50,43 @@ export default {
     idArray() {
       var temp = new Array();
       for (var i in this.courses) {
-        temp.push({ key: this.courses[i].id, label: this.courses[i].id });
+        temp.push({
+          key: this.courses[i].course_id,
+          label: this.courses[i].course_id
+        });
       }
       return temp;
     },
     nameArray() {
       var temp = new Array();
       for (var i in this.courses) {
-        temp.push({ key: this.courses[i].id, label: this.courses[i].name });
+        temp.push({
+          key: this.courses[i].course_id,
+          label: this.courses[i].course_name
+        });
       }
       return temp;
     },
     onValueChange() {
       this.$store.commit("SetCurrentCourse", this.value);
+      this.$http
+        .post(
+          "http://182.92.122.205:8080/",
+          "sql=select-exp_name,time,exp_tc,num,room-from-experiment-natural-join-exp_time-natural-join-teacher-where-course_id=" +
+            this.value +
+            ";"
+        )
+        .then(res => {
+          var str = res.data;
+          var result;
+          if (String(str) != "") {
+            str = str.replace(/'/g, '"');
+            result = JSON.parse(str);
+          } else {
+            result = [];
+          }
+          this.$store.commit("SetExperiment", result);
+        });
     }
   }
 };
