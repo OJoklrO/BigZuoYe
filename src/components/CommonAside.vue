@@ -16,18 +16,19 @@
 export default {
   computed: {
     randerList: function() {
-      var list = new Array();
-      if (this.$store.state.user == null) return this.asideMenu;
+      // var list = new Array();
+      // if (this.$store.state.user == null) 
+      return this.asideMenu;
 
-      for (var i in this.asideMenu) {
-        if (
-          this.asideMenu[i].authority == 1 ||
-          this.asideMenu[i].authority == 3
-        )
-          list.push(this.asideMenu[i]);
-      }
+      // for (var i in this.asideMenu) {
+      //   if (
+      //     this.asideMenu[i].authority == 1 ||
+      //     this.asideMenu[i].authority == 3
+      //   )
+      //     list.push(this.asideMenu[i]);
+      // }
 
-      return list;
+      // return list;
     }
   },
   methods: {

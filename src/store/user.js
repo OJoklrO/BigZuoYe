@@ -9,7 +9,8 @@ export default {
         userName:"877494093",
         password:"234567"
       }
-    ]
+    ],
+    test_list:[]
   },
   mutations: {
     SignIn(state, val) {

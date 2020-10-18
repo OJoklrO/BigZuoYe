@@ -37,31 +37,39 @@
     },
     methods:{
       login(){
+        this.$http.post("http://182.92.122.205:8080/","sqltype=1&id=15054039").then(res=>{
+          var str=res.data
+          // var res1=JSON.parse(str)
+          // console.log(res1)
+          var str1 = unescape(str.replace(/\\u/g, "%u"));
+          console.log(str1)
+          console.log(res.data)
+          console.log("chenggong")
+        })
+
+
+
         // 如果密码用户名正确则正常登录
         // this.visible=false
         // console.log(this.$router)
         // this.$router.push({ path:'course'  })
         // console.log(this.userList)
-        var flag=false
-        for(var item in this.userList){
-          // console.log(item)
-          if( this.userList[item].userName==this.user_name && this.userList[item].password==this.password){
-            this.$router.push({ path:'course'  })
-            console.log("登录成功")
-            flag=true
-            break
-          }
-        }
-        if(flag==false){
-          alert("登陆失败")
-          this.user_name=''
-          this.password=''
-        }
 
-      // 用户名不存在
-      //alert("用户名不存在 , 请先注册")
-      // 密码错误
-      //alert("密码错误")
+        // var flag=false
+        // for(var item in this.userList){
+        //   // console.log(item)
+        //   if( this.userList[item].userName==this.user_name && this.userList[item].password==this.password){
+        //     this.$router.push({ path:'course'  })
+        //     console.log("登录成功")
+        //     flag=true
+        //     break
+        //   }
+        // }
+        // if(flag==false){
+        //   alert("登陆失败")
+        //   this.user_name=''
+        //   this.password=''
+        // }
     }
   }
 };
