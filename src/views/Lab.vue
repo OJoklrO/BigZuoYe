@@ -10,12 +10,12 @@
     <!-- 表格 -->
     <my-table-room></my-table-room>
     <!-- 按钮 -->
-    <div class="btn_banner">
+    <!-- <div class="btn_banner">
       <el-button round class="add_button" @click="dialogVisible = true">
         <i class="el-icon-plus"></i>
         添加
       </el-button>
-    </div>
+    </div> -->
     <el-dialog title="添加实验" :visible.sync="dialogVisible">
       <el-form @submit.native.prevent>
         <el-form-item label="实验名称" :label-width="formLabelWidth">
