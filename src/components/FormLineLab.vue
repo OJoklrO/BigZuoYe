@@ -72,7 +72,7 @@ export default {
       this.$http
         .post(
           "http://182.92.122.205:8080/",
-          "sql=select-exp_name,time,exp_tc,num,room-from-experiment-natural-join-exp_time-natural-join-teacher-where-course_id=" +
+          "sql=select-exp_id,exp_name,time,exp_tc,num,room-from-experiment-natural-join-exp_time-natural-join-teacher-where-course_id=" +
             this.value +
             ";"
         )

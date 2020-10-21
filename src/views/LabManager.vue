@@ -27,8 +27,8 @@
       添加
     </el-button>
     <!-- <el-button round class="dele_button">
-      <i class="el-icon-delete"></i>
-      删除
+      <i class="el-icon-edit"></i>
+      编辑
     </el-button> -->
   </div>
 </template>
@@ -38,6 +38,7 @@ import MyTableLab from "@/components/MyTableLab";
 import FormLineLab from "@/components/FormLineLab";
 export default {
   beforeMount() {
+    this.$store.commit("SetExperiment", []);
     this.freshCourse();
   },
   methods: {

@@ -35,7 +35,7 @@
         >搜索</el-button
       >
     </el-form-item>
-  </el-form> 
+  </el-form>
 </template>
 <script>
 export default {
@@ -52,82 +52,94 @@ export default {
       laber_list: [],
       class_list: [],
       query_message: []
-      }
+    };
+  },
+  methods: {
+    onSubmit() {
+      // 编写筛选函数获得query_message对象
+      // 用组成的字符串代替参数
+      var argu_post =
+        "sqltype=8&na=" +
+        this.current_lab +
+        "&teac=" +
+        this.current_laber +
+        "&cla=" +
+        this.current_class;
+      // console.log(argu_post)
+      // 请求数据
+      this.$http.post("http://182.92.122.205:8080/", argu_post).then(res => {
+        var str = res.data;
+        if (String(str) != "") {
+          str = str.replace(/'/g, '"');
+          var resobj = JSON.parse(str);
+          console.log(resobj);
+          this.query_message = resobj;
+        } else {
+          this.query_message = [];
+          // 警告弹框
+          this.open3();
+        }
+        // 向vuex提交数据
+        var temp = [];
+        temp = this.query_message;
+        this.$store.commit("SetGrade", temp);
+      });
     },
-    methods: {
-      onSubmit() {
-        // 编写筛选函数获得query_message对象
-        // 用组成的字符串代替参数
-        var argu_post="sqltype=8&na="+this.current_lab+"&teac="+this.current_laber+"&cla="+this.current_class;
-        // console.log(argu_post)
-        // 请求数据
-        this.$http.post("http://182.92.122.205:8080/",argu_post).then(res=>{
-          var str=res.data
-          if(String(str) != ""){
-            str=str.replace(/'/g, '"')
-            var resobj=JSON.parse(str)
-            console.log(resobj)
-            this.query_message=resobj
-          }else{
-            this.query_message=[]
-            // 警告弹框
-            this.open3()
-          }
-          // 向vuex提交数据
-          var temp = []
-          temp=this.query_message
-          this.$store.commit("SetGrade", temp)
-        })
-      },
-      open3() {
+    open3() {
       this.$message({
-        message: '没有所查找信息哦！',
-        type: 'warning'
+        message: "没有所查找信息哦！",
+        type: "warning"
       });
     }
-    },
-    beforeMount:function(){
-      // 先把数据清空store
-      this.$store.commit("SetGrade", [])
-      // 用current组成字符串  --lab_list
-      this.$http.post("http://182.92.122.205:8080/","gettable=experiment").then(res=>{
-        var str=res.data
-        str=str.replace(/'/g, '"')
-        var resobj=JSON.parse(str)
+  },
+  beforeMount: function() {
+    // 先把数据清空store
+    this.$store.commit("SetGrade", []);
+    // 用current组成字符串  --lab_list
+    this.$http
+      .post("http://182.92.122.205:8080/", "gettable=experiment")
+      .then(res => {
+        var str = res.data;
+        str = str.replace(/'/g, '"');
+        var resobj = JSON.parse(str);
         // 循环赋值
-        for(var item of resobj){
-          this.lab_list.push(item.exp_name)
+        for (var item of resobj) {
+          this.lab_list.push(item.exp_name);
         }
         // console.log(resobj)
-      })
-      //  --laber_list
-      this.$http.post("http://182.92.122.205:8080/","sql=select-distinct-exp_tc-from-teacher").then(res=>{
-        var str=res.data
+      });
+    //  --laber_list
+    this.$http
+      .post(
+        "http://182.92.122.205:8080/",
+        "sql=select-distinct-exp_tc-from-teacher"
+      )
+      .then(res => {
+        var str = res.data;
         // console.log(str)
-        str=str.replace(/'/g, '"')
-        var resobj=JSON.parse(str)
+        str = str.replace(/'/g, '"');
+        var resobj = JSON.parse(str);
         // 循环赋值
-        for(var item of resobj){
-          this.laber_list.push(item.exp_tc)
+        for (var item of resobj) {
+          this.laber_list.push(item.exp_tc);
         }
         // console.log(resobj)
-      })
-      //  --class_list
-      this.$http.post("http://182.92.122.205:8080/","gettable=course_class").then(res=>{
-        var str=res.data
-        str=str.replace(/'/g, '"')
-        var resobj=JSON.parse(str)
+      });
+    //  --class_list
+    this.$http
+      .post("http://182.92.122.205:8080/", "gettable=course_class")
+      .then(res => {
+        var str = res.data;
+        str = str.replace(/'/g, '"');
+        var resobj = JSON.parse(str);
         // 循环赋值
-        for(var item of resobj){
-          this.class_list.push(item.class)
+        for (var item of resobj) {
+          this.class_list.push(item.class);
         }
         // console.log(resobj)
-      })
-     
-
-    }
+      });
   }
-
+};
 </script>
 <style scoped lang="scss">
 .room_search {

@@ -1,5 +1,6 @@
 <template>
   <div class="ban">
+    <!-- 登录 -->
     <el-card class="login_title" v-if="show_flag">
       <span class="title">用户登录</span>
       <div class="banner1">
@@ -19,11 +20,25 @@
         <el-button size="small" round @click="zhuce_1">注册</el-button>
       </div>
     </el-card>
+
+    <!-- 注册 -->
     <el-card class="zhuce_title" v-else>
       <span class="title">新用户注册</span>
       <div class="banner1">
         <span>用户名</span>
         <el-input v-model="new_username" placeholder="请输入账号"></el-input>
+      </div>
+      <div class="authsele">
+        <span>用户权限</span>
+        <el-select v-model="new_auth" placeholder="请选择">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
       </div>
       <div class="banner2">
         <span>新密码</span>
@@ -59,9 +74,21 @@ export default {
       auth: 0,
 
       // 注册页面绑定变量
+      show_flag: true,
       new_username: "",
       new_passwd_1: "",
-      new_passwd_2: ""
+      new_passwd_2: "",
+      new_auth: 0,
+      options: [
+        {
+          value: "1",
+          label: "实验管理员"
+        },
+        {
+          value: "2",
+          label: "实验员"
+        }
+      ]
     };
   },
   computed: {
@@ -87,6 +114,8 @@ export default {
           // console.log(res1)
           //var str1 = unescape(str.replace(/\\u/g, "%u"));
         });
+      // 登录后转到成绩查询
+      this.$router.push("/search");
     },
     zhuce_1() {
       // 隐藏登录界面，换到注册界面
@@ -171,5 +200,11 @@ export default {
   display: flex;
   justify-content: space-around;
   width: 200px;
+}
+.authsele {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  width: 100%;
 }
 </style>

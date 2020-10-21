@@ -143,6 +143,7 @@ import { mapState } from "vuex";
 
 export default {
   beforeMount() {
+    this.$store.commit("SetExperiment", []);
     this.freshCourse();
   },
   methods: {

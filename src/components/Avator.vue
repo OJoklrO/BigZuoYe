@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown>
+  <el-dropdown @command="handleCommand">
     <el-avatar id="avator" :size="60">
       {{ content == "" ? content : content.substring(0, 2) }}
     </el-avatar>
@@ -16,6 +16,12 @@ export default {
     ...mapState({
       content: state => state.user.username
     })
+  },
+  methods: {
+    handleCommand() {
+      this.$store.commit("SignOut");
+      this.$router.push("/");
+    }
   }
 };
 </script>
