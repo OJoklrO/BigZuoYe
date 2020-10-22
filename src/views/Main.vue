@@ -161,7 +161,7 @@ export default {
   // margin-top: 50px;
 }
 .zhuce_title {
-  height: 360px;
+  height: 400px;
   width: 400px;
 }
 .el-card__body {
@@ -201,10 +201,19 @@ export default {
   justify-content: space-around;
   width: 200px;
 }
-.authsele {
+.authsele{
   display: flex;
   justify-content: space-between;
-  margin: 30px 0;
+  margin-bottom: 30px;
   width: 100%;
+  position: relative;
+}
+.authsele span{
+  line-height: 40px;
+}
+.authsele .el-select{
+  width: 250px;
+  position: absolute;
+  right: 5px;
 }
 </style>
