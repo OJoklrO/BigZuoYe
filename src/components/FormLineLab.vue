@@ -77,6 +77,7 @@ export default {
             ";"
         )
         .then(res => {
+          console.log(this.value);
           var str = res.data;
           var result;
           if (String(str) != "") {

@@ -10,8 +10,9 @@ export default {
     },
     SetCurrentCourse(state, key) {
       for (var i in state.courses) {
-        if (state.courses[i].course_id == key)
+        if (state.courses[i].course_id == key) {
           state.currentCourse = state.courses[i];
+        }
       }
       state.temp = 1;
     },
