@@ -51,7 +51,7 @@ export default {
     SignOut(state) {
       state.username = "";
       state.userauthority = 0;
-      state.asideMenu = [];
+      state.randerList = [];
     }
   },
   actions: {}

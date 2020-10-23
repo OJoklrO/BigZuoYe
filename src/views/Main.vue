@@ -109,27 +109,48 @@ export default {
           obj.auth = this.auth;
           if (this.auth != 0) {
             this.$store.commit("SignIn", obj);
+            this.$router.push("/search");
+          } else {
+            this.$message({
+              message: "密码不符合要求",
+              type: "error"
+            });
           }
-          // var res1=JSON.parse(str)
-          // console.log(res1)
-          //var str1 = unescape(str.replace(/\\u/g, "%u"));
         });
       // 登录后转到成绩查询
-      this.$router.push("/search");
     },
     zhuce_1() {
       // 隐藏登录界面，换到注册界面
       this.show_flag = false;
+      this.message = {};
     },
     zhuce_2() {
-      // 判断两个密码是否为空以及是否相等
+      if (
+        this.new_passwd_1 == "" ||
+        this.new_passwd_2 == "" ||
+        this.new_passwd_1 != this.new_passwd_2
+      )
+        this.dialog_message();
+      this.$http
+        .post(
+          "http://182.92.122.205:8080/",
+          "id=" +
+            this.new_username +
+            "&passwd=" +
+            this.new_passwd_1 +
+            "&qx=" +
+            this.new_auth
+        )
+        .then(res => {
+          var authttt = Number(res.data.toString());
+          this.auth = authttt;
+          this.$store.commit("SignIn", {
+            username: this.new_username,
+            auth: this.new_auth
+          });
 
-      // 不相等时的会话框
-      this.dialog_message();
-
-      // 注册成功时隐藏注册界面，显示登录弹框
-      this.show_flag = true;
-      this.new_username = this.new_passwd_1 = this.new_passwd_2 = "";
+          this.$router.push("/search");
+        });
     },
     dialog_message() {
       this.$message({
@@ -201,17 +222,17 @@ export default {
   justify-content: space-around;
   width: 200px;
 }
-.authsele{
+.authsele {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
   width: 100%;
   position: relative;
 }
-.authsele span{
+.authsele span {
   line-height: 40px;
 }
-.authsele .el-select{
+.authsele .el-select {
   width: 250px;
   position: absolute;
   right: 5px;

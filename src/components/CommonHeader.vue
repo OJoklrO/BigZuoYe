@@ -1,6 +1,6 @@
 <template>
   <div id="header">
-    <i id="icon" class="el-icon-s-home" @click="onclick">实验管理系统</i>
+    <i id="icon" class="el-icon-s-home">实验管理系统</i>
     <avator id="avator" />
     <el-divider />
   </div>
